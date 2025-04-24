@@ -3,40 +3,40 @@ package com.example.sorting;
 public class SortingUtility {
 
     //copilot instruction: Implement Gnome Sort
-    public static <T extends Comparable<T>> void gnomeSort(T[] data) {
-        if (data == null || data.length == 0) {
+    public static <T extends Comparable<T>> void gnomeSort(T[] a) {
+        if (a == null || a.length == 0) {
             return;
         }
 
-        int index = 0;
+        int pos = 0;
 
-        while (index < data.length) {
-            if (index == 0 || data[index].compareTo(data[index - 1]) >= 0) {
-                index++;
+        while (pos < a.length) {
+            if (pos == 0 || a[pos].compareTo(a[pos - 1]) >= 0) {
+                pos++;
             } else {
-                swap(data, index, index - 1);
-                index--;
+                swap(a, pos, pos - 1);
+                pos--;
             }
         }
     }
 
     //copilot instruction: Implement Cocktail Shaker Sort
-    public static <T extends Comparable<T>> void cocktailShakerSort(T[] data) {
-        if (data == null || data.length == 0) {
+    public static <T extends Comparable<T>> void cocktailShakerSort(T[] A) {
+        if (A == null || A.length == 0) {
             return;
         }
 
         boolean swapped;
         int start = 0;
-        int end = data.length - 1;
+        int end = A.length - 1;
 
         do {
             swapped = false;
 
             // Forward pass
             for (int i = start; i < end; i++) {
-                if (data[i].compareTo(data[i + 1]) > 0) {
-                    swap(data, i, i + 1);
+                if (A[i].compareTo(A[i + 1]) > 0) {
+                    swap(A, i, i + 1);
                     swapped = true;
                 }
             }
@@ -51,8 +51,8 @@ public class SortingUtility {
 
             // Backward pass
             for (int i = end - 1; i >= start; i--) {
-                if (data[i].compareTo(data[i + 1]) > 0) {
-                    swap(data, i, i + 1);
+                if (A[i].compareTo(A[i + 1]) > 0) {
+                    swap(A, i, i + 1);
                     swapped = true;
                 }
             }
@@ -62,28 +62,28 @@ public class SortingUtility {
     }
 
     //copilot instruction: Implement Shell Sort
-    public static <T extends Comparable<T>> void shellSort(T[] data) {
-        if (data == null || data.length == 0) {
+    public static <T extends Comparable<T>> void shellSort(T[] a) {
+        if (a == null || a.length == 0) {
             return;
         }
 
-        int n = data.length;
+        int n = a.length;
 
         // Start with a large gap, then reduce the gap
         for (int gap = n / 2; gap > 0; gap /= 2) {
 
             // Perform a gapped insertion sort for this gap size
             for (int i = gap; i < n; i++) {
-                T temp = data[i];
+                T temp = a[i];
                 int j;
 
-                // Shift earlier gap-sorted elements up until the correct location for data[i] is found
-                for (j = i; j >= gap && data[j - gap].compareTo(temp) > 0; j -= gap) {
-                    data[j] = data[j - gap];
+                // Shift earlier gap-sorted elements up until the correct location for a[i] is found
+                for (j = i; j >= gap && a[j - gap].compareTo(temp) > 0; j -= gap) {
+                    a[j] = a[j - gap];
                 }
 
-                // Put temp (the original data[i]) in its correct location
-                data[j] = temp;
+                // Put temp (the original a[i]) in its correct location
+                a[j] = temp;
             }
         }
     }
